@@ -1,4 +1,4 @@
-name: Ejecutar acción dentro de un contenedor
+name: build-dart
 
 on:
   push:
@@ -6,21 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-in-container:
+  run-dart:
     runs-on: ubuntu-latest
 
     container:
       image: dart:stable
-      options: --cpus 1 --memory 512m
 
     steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4
-
-      - name: Ver versión de Dart dentro del contenedor
+      - name: Run dart --version
         run: dart --version
-
-      - name: Crear y ejecutar script Dart dentro del contenedor
-        run: |
-          echo "void main() { print('Hola desde un contenedor con Dart'); }" > main.dart
-          dart run main.dart
